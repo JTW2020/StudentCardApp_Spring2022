@@ -89,7 +89,36 @@ class StudentModel {
 		xhttp.open("DELETE", url, true);
 		xhttp.setRequestHeader("Content-type", "application/json");
 		xhttp.send();
+		 
 	}
+	// called by studentController.handleStudentSubmit to pass JSON data through the api to the model
+	createStudentData() {
+		
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() { 
+			console.log("in createStudentData()");
+			if (this.readyState == 4 && this.status == 200) {
+				console.log(this.responseText);
+
+				const element = document.querySelector('#root');
+				let event = new CustomEvent('StudentCreated', { detail: 'success' });
+				element.dispatchEvent(event);
+
+			}
+			
+		}
+		const nameVal = document.getElementById("nameValue").value;
+		console.log(nameVal);
+		const classVal = document.getElementById("classValue").value;
+		console.log(classVal);
+		const majorVal = document.getElementById("majorValue").value;
+		console.log(majorVal);
+		let url = "http://localhost:3050/api/student";
+		xhttp.open("POST", url, true);
+		xhttp.setRequestHeader("Content-type", "application/json");
+		console.log(JSON.stringify({ name: nameVal, class: classVal, major: majorVal }));
+		xhttp.send(JSON.stringify({ name: nameVal, class: classVal, major: majorVal }));
+    }
 
 }
 
@@ -98,10 +127,6 @@ class StudentView {
 		//this.createView();
 	}
 	
-
-
-
-
 	createView(studentData) {
 		
 //		consol.log(studentData);
@@ -240,7 +265,23 @@ class StudentController {
 	handleStudentDeleted() {
 		const modal = document.querySelector('#studentModal');
 		$('#studentModal').modal('toggle');
+		window.location.reload();// reloads page when delete is clicked, but not dynamic XML
 	}
+
+	handleStudentCreated() {
+		console.log('create student invoked');
+		const modal = document.querySelector('#createStudent');
+		$('#createStudent').modal('toggle');
+	}
+
+	handleStudentSubmit() {
+		console.log("submit button clicked");
+		this.model.createStudentData();
+	}
+	studentCreatePost() {
+		console.log("student_create_post called in Student.js file");
+    }
+	
 
 
 }

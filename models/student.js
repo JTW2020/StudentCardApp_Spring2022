@@ -30,7 +30,7 @@ class StudentModel {
 	}
 
 	//return the student with the specific id
-	getStudentById(id) {
+	getStudentById(id) { 
 
 		return this.studentList.find(id => {
 			return id == id
@@ -41,6 +41,14 @@ class StudentModel {
 	deleteStudentById(studentId) {
 		this.studentList = this.studentList.filter(function(student){return student.id != studentId});
 	}
+	//creates new student when passed a JSON element
+	createStudent(studentName, studentClass, studentMajor) {
+		console.log("in student.js model")
+		console.log(studentName + studentClass + studentMajor);
+		const newStudent = { id: this.reserveAndGetNextId(), name: studentName, class: studentClass, major: studentMajor };
+		console.log(newStudent);
+		this.studentList.push(newStudent);
+    }
 	
 
 

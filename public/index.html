@@ -36,6 +36,39 @@
 		</div>
 
 
+		<div class="card" onclick="app.handleStudentCreated();"style="flex:auto;width:150px;margin-left:213px;margin-top:10px; color:green">
+			<div class="card-body">
+				<div class="card-title">New Student</div>
+
+			</div>
+
+		</div>
+
+		<div class="modal fade" id="createStudent" tabindex="-1" role="form" aria-labelledby="createStudentLabel" style="width: 500px; padding: 30px;" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-title">
+						<h5>Add New Student</h5>
+					</div>
+					<div class="modal-body">
+						
+						<label for="nameValue">Name:</label><br />
+						<input type="text" id="nameValue" /><br />
+						<label for="classValue">Class:</label><br />
+						<input type="text" id="classValue" /><br />
+						<label for="majorValue">Major:</label><br />
+						<input type="text" id="majorValue" /><br />
+					</div>
+
+
+					<footer class="creatStudentFooter">
+						<button type="submit" class="btn btn-primary" onclick="app.handleStudentSubmit()" data-dismiss="modal">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+						<span aria-hidden="true">&times;</span>
+					</footer>
+				</div>
+			</div>
+		</div>
 	</body>
 
 </HTML>

@@ -23,21 +23,40 @@ exports.student_delete = function(req, res) {
 	result = {result:'success'}
     res.send(result);
 };
+//new
+/*
+exports.student_create_post = function (req, res) {
+    console.log("in studentController student_create_post");
+    student = this.studentModel.createStudent(req.body.name, req.body.class, req.body.major);
+    result = { result: 'success' }
+    res.send(result);
+}*/
+
+exports.student_update_post = function (req, res) {
+    student = this.studentModel.updateStudent(req.params.id, req.body);
+    result = { result: 'success' }
+    res.send(result);
+}
 
 
 
 //NOT IMPLEMENTED
 
 // Display student create form on GET.
-exports.student_create_get = function(req, res) {
+exports.student_create_get = function (req, res) {
     res.send('NOT IMPLEMENTED: student create GET');
 };
 
 // Handle student create on POST.
+
 exports.student_create_post = function(req, res) {
     //if the data is JSON, access the data using req.body.<field> ie. req.body.name
     console.log(req.body);
-    res.send('NOT IMPLEMENTED: student create POST');
+    console.log("in studentController student_create_post");
+    student = this.studentModel.createStudent(req.body.name, req.body.class, req.body.major);
+    result = { result: 'success' }
+    res.send(result);
+   // res.send('NOT IMPLEMENTED: student create POST');
 };
 
 // Display student delete form on GET.
