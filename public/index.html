@@ -36,7 +36,7 @@
 		</div>
 
 
-		<div class="card" onclick="app.handleStudentCreated();"style="flex:auto;width:150px;margin-left:213px;margin-top:10px; color:green">
+		<div class="card" onclick="app.handleStudentCreated();"style="flex:auto;width:200px;margin-left:auto;margin-right:auto;margin-top:10px; color:green">
 			<div class="card-body">
 				<div class="card-title">New Student</div>
 
@@ -44,7 +44,7 @@
 
 		</div>
 
-		<div class="modal fade" id="createStudent" tabindex="-1" role="form" aria-labelledby="createStudentLabel" style="width: 500px; padding: 30px;" aria-hidden="true">
+		<div class="modal fade" id="createStudent" tabindex="-1" role="form" aria-labelledby="createStudentLabel" style="width: 500px; padding: 30px; margin-left:auto; margin-right:auto; margin-top:10px;" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-title">
@@ -62,8 +62,8 @@
 
 
 					<footer class="creatStudentFooter">
-						<button type="submit" class="btn btn-primary" onclick="app.handleStudentSubmit()" data-dismiss="modal">Save</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+						<button type="submit" class="btn btn-primary" onclick="app.handleStudentSubmit()" style="padding: 10px; margin-left:auto" data-dismiss="modal" >Save</button>
+						<button type="button" class="btn btn-secondary" onclick="app.handleCancelClick()"data-dismiss="modal" aria-label="Close" style="padding: 10px">Cancel</button>
 						<span aria-hidden="true">&times;</span>
 					</footer>
 				</div>

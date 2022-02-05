@@ -49,6 +49,7 @@ exports.student_create_get = function (req, res) {
 
 // Handle student create on POST.
 
+//edited to interact with model
 exports.student_create_post = function(req, res) {
     //if the data is JSON, access the data using req.body.<field> ie. req.body.name
     console.log(req.body);

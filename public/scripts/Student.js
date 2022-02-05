@@ -103,7 +103,6 @@ class StudentModel {
 				const element = document.querySelector('#root');
 				let event = new CustomEvent('StudentCreated', { detail: 'success' });
 				element.dispatchEvent(event);
-
 			}
 			
 		}
@@ -129,7 +128,6 @@ class StudentView {
 	
 	createView(studentData) {
 		
-//		consol.log(studentData);
 		this.studentData = studentData;
 		
 		this.app = viewHelper.getElement('#root');
@@ -168,7 +166,7 @@ class StudentView {
 			cardBody.append(cardTitle, cardText);
 			card.append(cardBody);
 			cardDeck.append(card);
-		
+			
 		}
 		return cardDeck;
 	}
@@ -265,7 +263,7 @@ class StudentController {
 	handleStudentDeleted() {
 		const modal = document.querySelector('#studentModal');
 		$('#studentModal').modal('toggle');
-		window.location.reload();// reloads page when delete is clicked, but not dynamic XML
+		window.location.reload();// reloads page when delete is clicked
 	}
 
 	handleStudentCreated() {
@@ -277,9 +275,13 @@ class StudentController {
 	handleStudentSubmit() {
 		console.log("submit button clicked");
 		this.model.createStudentData();
+		this.handleCancelClick(); // clears the form when submitted
 	}
-	studentCreatePost() {
-		console.log("student_create_post called in Student.js file");
+	// clears the Add New Student modal once clicked
+	handleCancelClick() {
+		document.getElementById("nameValue").value = "";
+		document.getElementById("classValue").value = "";
+		document.getElementById("majorValue").value = "";
     }
 	
 
