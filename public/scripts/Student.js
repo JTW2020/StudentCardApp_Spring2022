@@ -91,6 +91,29 @@ class StudentModel {
 		xhttp.send();
 		 
 	}
+	// added a function to get the newest student for the purpose of updating the page with the new student added. **OBSOLUTE**
+	/*
+	getSingleStudent(id) {
+		console.log("In getSingleStudent()");
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				console.log(this.responseText);
+
+				student = JSON.parse(this.responseText);
+				const element = document.querySelector('#root');
+				let event = new CustomEvent('GetSingleStudent', { detail: this.student });
+				element.dispatchEvent(event);
+			}
+			
+		};
+		let url = `http://localhost:3050/api/student/${id}`;
+		xhttp.open("GET", url, true);
+		xhttp.setRequestHeader("Content-type", "application/json");
+		xhttp.send();
+	}
+	*/
+
 	// called by studentController.handleStudentSubmit to pass JSON data through the api to the model
 	createStudentData() {
 		
@@ -112,7 +135,7 @@ class StudentModel {
 		console.log(classVal);
 		const majorVal = document.getElementById("majorValue").value;
 		console.log(majorVal);
-		let url = "http://localhost:3050/api/student";
+		let url = `http://localhost:3050/api/student`;
 		xhttp.open("POST", url, true);
 		xhttp.setRequestHeader("Content-type", "application/json");
 		console.log(JSON.stringify({ name: nameVal, class: classVal, major: majorVal }));
@@ -127,9 +150,8 @@ class StudentView {
 	}
 	
 	createView(studentData) {
-		
+		this.clearView();
 		this.studentData = studentData;
-		
 		this.app = viewHelper.getElement('#root');
 		let title = this.createTitle();
 		let cards = this.createCards();
@@ -138,6 +160,10 @@ class StudentView {
 		container.append(title, cards);
 		
 		this.app.append(container);
+	}
+	//method that removes old cards so updated cards can take their place.
+	clearView() {
+		document.getElementById('root').innerHTML = "";
 	}
 
 	createTitle() {
@@ -242,6 +268,11 @@ class StudentController {
 		element.addEventListener('StudentDeleted', function(event) {
 			app.handleStudentDeleted(event.detail);
 		});
+		//new listener added to get student
+		element.addEventListener('GetSingleStudent', function (event) {
+			console.log(event.detail);
+			app.handleStudentData(event.detail);
+		});
 	}
 	
 	handleStudentData(student){
@@ -258,12 +289,13 @@ class StudentController {
 	handleDeleteCard(id) {
 		console.log('modal ' + id + ' delete');
 		this.model.deleteStudent(id);
+		this.model.getStudentData();
 	}
 
 	handleStudentDeleted() {
 		const modal = document.querySelector('#studentModal');
 		$('#studentModal').modal('toggle');
-		window.location.reload();// reloads page when delete is clicked
+		//window.location.reload(); reloads page when delete is clicked
 	}
 
 	handleStudentCreated() {
@@ -275,6 +307,7 @@ class StudentController {
 	handleStudentSubmit() {
 		console.log("submit button clicked");
 		this.model.createStudentData();
+		this.model.getStudentData();
 		this.handleCancelClick(); // clears the form when submitted
 	}
 	// clears the Add New Student modal once clicked
@@ -282,7 +315,9 @@ class StudentController {
 		document.getElementById("nameValue").value = "";
 		document.getElementById("classValue").value = "";
 		document.getElementById("majorValue").value = "";
-    }
+	}
+
+	
 	
 
 

@@ -8,6 +8,6 @@
     "\\public\\scripts",
     "\\routes"
   ],
-  "SelectedNode": "\\controllers\\studentController.js",
+  "SelectedNode": "\\public\\scripts\\Student.js",
   "PreviewInSolutionExplorer": false
 }
